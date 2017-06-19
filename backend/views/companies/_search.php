@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'created_date') ?>
 
+    <?php // echo $form->field($model, 'start_date') ?>
+
     <?php // echo $form->field($model, 'status') ?>
 
     <div class="form-group">

@@ -12,6 +12,7 @@ use Yii;
  * @property string $email
  * @property string $address
  * @property string $created_date
+ * @property string $start_date 
  * @property string $status
  *
  * @property Branches[] $branches
@@ -34,7 +35,7 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'address', 'created_date', 'status'], 'required'],
-            [['created_date'], 'safe'],
+            [['created_date', 'start_date'], 'safe'],
             [['status'], 'string'],
             [['name', 'email'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],
@@ -52,6 +53,7 @@ class Companies extends \yii\db\ActiveRecord
             'email' => 'Email',
             'address' => 'Address',
             'created_date' => 'Created Date',
+            'start_date' => 'Start Date', 
             'status' => 'Status',
         ];
     }

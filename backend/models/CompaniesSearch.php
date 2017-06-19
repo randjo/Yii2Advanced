@@ -19,7 +19,7 @@ class CompaniesSearch extends Companies
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'address', 'created_date', 'status'], 'safe'],
+            [['name', 'email', 'address', 'created_date', 'start_date', 'status'], 'safe'],
         ];
     }
 
@@ -59,8 +59,9 @@ class CompaniesSearch extends Companies
 
         // grid filtering conditions
         $query->andFilterWhere([
-//            'id' => $this->id,
+            'id' => $this->id,
             'created_date' => $this->created_date,
+            'start_date' => $this->start_date,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
