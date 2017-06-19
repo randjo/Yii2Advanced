@@ -20,7 +20,7 @@ use backend\models\Branches;
 
     <?= $form->field($model, 'branch_id')->dropDownList(
     ArrayHelper::map(Branches::find()
-            ->where(['company_id' => 7])->all(), 'id', 'name'), ['prompt' => 'Select Branch']) ?>
+            ->where(['company_id' => 1])->all(), 'id', 'name'), ['prompt' => 'Select Branch']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>    
 

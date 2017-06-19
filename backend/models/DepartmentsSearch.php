@@ -68,10 +68,10 @@ class DepartmentsSearch extends Departments
             'departments.created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['ilike', 'departments.name', $this->name])
-            ->andFilterWhere(['ilike', 'status', $this->status])
-            ->andFilterWhere(['ilike', 'companies.name', $this->company_id])
-            ->andFilterWhere(['ilike', 'branches.name', $this->branch_id]);
+        $query->andFilterWhere(['like', 'departments.name', $this->name])
+            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'companies.name', $this->company_id])
+            ->andFilterWhere(['like', 'branches.name', $this->branch_id]);
 
         return $dataProvider;
     }

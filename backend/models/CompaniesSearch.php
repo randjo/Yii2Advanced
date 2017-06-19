@@ -63,10 +63,10 @@ class CompaniesSearch extends Companies
             'created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', 'email', $this->email])
-            ->andFilterWhere(['ilike', 'address', $this->address])
-            ->andFilterWhere(['ilike', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
