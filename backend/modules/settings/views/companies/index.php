@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use dosamigos\datepicker\DatePicker;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\settings\models\CompaniesSearch */
@@ -18,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?php Pjax::begin(['timeout' => 5000]);
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -28,11 +31,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'email:email',
             'address',
-            'start_date',
+            [
+                'attribute' => 'start_date',
+                'value' => 'start_date',
+                'format' =>'raw',
+                'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'start_date',
+                    'clientOptions' =>[
+                        'autoClose' => true,
+                        'format' => 'yyyy-mm-dd',
+                    ],
+                ])
+            ],
             'created_date',
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    Pjax::end(); ?>
 </div>

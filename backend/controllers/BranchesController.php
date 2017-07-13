@@ -125,4 +125,17 @@ class BranchesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionLists($id)
+    {
+        $countBranches = Branches::find()->where(['company_id' => $id])->count();
+        $branches = Branches::find()->where(['company_id' => $id])->all();
+        if ($countBranches > 0) {
+            foreach ($branches as $branch) {
+                echo "<option value=$branch->id>$branch->name</option>";
+            }
+        } else {
+            echo "<option> - </option>";
+        }
+    }
 }

@@ -20,6 +20,7 @@ use Yii;
  */
 class Companies extends \yii\db\ActiveRecord
 {
+    
     /**
      * @inheritdoc
      */
