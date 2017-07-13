@@ -26,7 +26,12 @@ use backend\models\Branches;
             ]) ?>
     
     <?= $form->field($model, 'branch_id')->dropDownList(
+<<<<<<< HEAD
     ArrayHelper::map(Branches::find()->all(), 'id', 'name'), ['prompt' => 'Select Branch']) ?>
+=======
+    ArrayHelper::map(Branches::find()
+            ->where(['company_id' => 1])->all(), 'id', 'name'), ['prompt' => 'Select Branch']) ?>
+>>>>>>> 63962f19473c176eb02083090eb276e12cd4fde6
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>    
 

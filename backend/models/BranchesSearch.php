@@ -66,10 +66,10 @@ class BranchesSearch extends Branches
             'branches.created_date' => $this->created_date,
         ]);
 
-        $query->andFilterWhere(['ilike', 'branches.name', $this->name])
-            ->andFilterWhere(['ilike', 'branches.address', $this->address])
-            ->andFilterWhere(['ilike', 'branches.status', $this->status])
-            ->andFilterWhere(['ilike', 'companies.name', $this->company_id]);
+        $query->andFilterWhere(['like', 'branches.name', $this->name])
+            ->andFilterWhere(['like', 'branches.address', $this->address])
+            ->andFilterWhere(['like', 'branches.status', $this->status])
+            ->andFilterWhere(['like', 'companies.name', $this->company_id]);
 
         return $dataProvider;
     }
