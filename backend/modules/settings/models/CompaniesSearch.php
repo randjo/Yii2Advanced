@@ -61,7 +61,6 @@ class CompaniesSearch extends Companies
         $query->andFilterWhere([
             'id' => $this->id,
             'created_date' => $this->created_date,
-            'start_date' => $this->start_date,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

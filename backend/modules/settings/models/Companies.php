@@ -13,7 +13,6 @@ use Yii;
  * @property string $address
  * @property string $created_date
  * @property string $status
- * @property string $start_date
  *
  * @property Branches[] $branches
  * @property Departments[] $departments
@@ -35,8 +34,8 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'address', 'created_date', 'status', 'start_date'], 'required'],
-            [['created_date', 'start_date'], 'safe'],
+            [['name', 'email', 'address', 'created_date', 'status'], 'required'],
+            [['created_date'], 'safe'],
             [['status'], 'string'],
             [['name', 'email'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],
@@ -55,7 +54,6 @@ class Companies extends \yii\db\ActiveRecord
             'address' => 'Address',
             'created_date' => 'Created Date',
             'status' => 'Status',
-            'start_date' => 'Start Date',
         ];
     }
 
