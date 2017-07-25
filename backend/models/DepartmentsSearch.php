@@ -18,7 +18,7 @@ class DepartmentsSearch extends Departments
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id'], 'integer', 'ttt'],
             [['name', 'created_date', 'status', 'branch_id', 'company_id'], 'safe'],
         ];
     }
