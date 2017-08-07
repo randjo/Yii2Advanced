@@ -1,14 +1,14 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\settings\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Companies;
+use backend\modules\settings\models\Companies;
 
 /**
- * CompaniesSearch represents the model behind the search form about `backend\models\Companies`.
+ * CompaniesSearch represents the model behind the search form about `backend\modules\settings\models\Companies`.
  */
 class CompaniesSearch extends Companies
 {
@@ -19,7 +19,7 @@ class CompaniesSearch extends Companies
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'address', 'created_date', 'start_date', 'status'], 'safe'],
+            [['name', 'email', 'address', 'created_date', 'status'], 'safe'],
         ];
     }
 
@@ -61,7 +61,6 @@ class CompaniesSearch extends Companies
         $query->andFilterWhere([
             'id' => $this->id,
             'created_date' => $this->created_date,
-            'start_date' => $this->start_date,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

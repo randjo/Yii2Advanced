@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace backend\modules\settings\models;
 
 use Yii;
 
@@ -12,7 +12,6 @@ use Yii;
  * @property string $email
  * @property string $address
  * @property string $created_date
- * @property string $start_date 
  * @property string $status
  *
  * @property Branches[] $branches
@@ -20,6 +19,7 @@ use Yii;
  */
 class Companies extends \yii\db\ActiveRecord
 {
+    
     /**
      * @inheritdoc
      */
@@ -34,8 +34,8 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'email', 'address', 'created_date', 'status'], 'required'],
             [['created_date'], 'safe'],
-            [['status'], 'required'],
             [['status'], 'string'],
             [['name', 'email'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],
@@ -49,11 +49,10 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Company Name',
+            'name' => 'Name',
             'email' => 'Email',
             'address' => 'Address',
             'created_date' => 'Created Date',
-            'start_date' => 'Start Date', 
             'status' => 'Status',
         ];
     }

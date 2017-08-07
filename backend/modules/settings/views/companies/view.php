@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Companies */
+/* @var $model backend\modules\settings\models\Companies */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'address',
             'created_date',
-            'start_date',
             'status',
         ],
     ]) ?>

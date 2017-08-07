@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Companies */
+/* @var $model backend\modules\settings\models\Companies */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'created_date')->textInput() ?>
-
-    <?= $form->field($model, 'start_date')->textInput() ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 
