@@ -20,8 +20,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'created_date')->textInput() ?>
 
-    <?= $form->field($model, 'start_date')->textInput() ?>
-
     <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 
     <div class="form-group">
