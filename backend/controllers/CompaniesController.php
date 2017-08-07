@@ -25,7 +25,7 @@ class CompaniesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'create', 'view', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
