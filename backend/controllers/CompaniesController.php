@@ -7,6 +7,7 @@ use backend\models\Companies;
 use backend\models\CompaniesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
@@ -20,6 +21,16 @@ class CompaniesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -65,8 +76,8 @@ class CompaniesController extends Controller
     {
         $model = new Companies();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->created_date = date('Y-m-d H:i:s');
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->created_date = date('Y/m/d H:i:s');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -86,9 +97,7 @@ class CompaniesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->created_date = date('Y-m-d H:i:s');
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

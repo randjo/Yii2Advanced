@@ -8,7 +8,7 @@ use yii\db\Migration;
  *
  * - `companies`
  */
-class m170618_181528_create_branches_table extends Migration
+class m170807_105333_create_branches_table extends Migration
 {
     /**
      * @inheritdoc
@@ -18,10 +18,10 @@ class m170618_181528_create_branches_table extends Migration
         $this->createTable('branches', [
             'id' => $this->primaryKey(),
             'company_id' => $this->integer()->notNull(),
-            'name' => $this->string(100)->notNull(),
-            'address' => $this->string(255)->notNull(),
-            'created_date' => $this->dateTime()->notNull(),
-//            'status' => $this->enum('active', 'inactive'), //not support in Yii migrate tool
+            'name' => $this->string(100),
+            'adrress' => $this->string(255),
+            'created_date' => $this->dateTime(),
+//            'status' => $this->enum('active', 'inactive'),
         ]);
 
         // creates index for column `company_id`

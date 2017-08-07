@@ -66,7 +66,7 @@ class DepartmentsController extends Controller
         $model = new Departments();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_date = date('Y-m-d H:i:s');
+            $model->created_date = date('Y/m/d H:i:s');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -86,9 +86,7 @@ class DepartmentsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->created_date = date('Y-m-d H:i:s');
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

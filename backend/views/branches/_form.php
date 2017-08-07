@@ -14,12 +14,12 @@ use backend\models\Companies;
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <?= $form->field($model, 'company_id')->dropDownList(
-    ArrayHelper::map(Companies::find()->all(), 'id', 'name'), ['prompt' => 'Select Company']) ?>
+    <?= $form->field($model, 'company_id')->dropDownList( 
+        ArrayHelper::map(Companies::find()->all(), 'id', 'name'), ['prompt' => 'Select Company']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'adrress')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => 'Status']) ?>
 

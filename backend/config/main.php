@@ -11,11 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'settings' => [
-            'class' => 'backend\modules\settings\Settings',
-        ],
-    ],
+    'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -34,29 +30,21 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'exportInterval' => YII_DEBUG ? 1 : 1000,
-                    'levels' => ['error', 'warning', 'info'],
-                    'except' => ['yii\db\*', 'yii\web\*'],
-                    'logVars' => [],
-                ],
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'exportInterval' => YII_DEBUG ? 50 : 1000,
-                    'levels' => ['trace'],
-                    'logFile' => '@app/runtime/logs/trace.log',
-                    'logVars' => [],
+                    'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
+        */
     ],
     'params' => $params,
 ];

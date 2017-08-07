@@ -9,8 +9,8 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
-    public $firstName;
-    public $lastName;
+    public $first_name;
+    public $last_name;
     public $username;
     public $email;
     public $password;
@@ -22,25 +22,18 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['firstName', 'required', 'message' => 'Should be filled!'],
-            ['firstName', 'string', 'max' => 100],
+            [['first_name', 'last_name', 'username', 'email'], 'trim'],
+            [['first_name', 'last_name', 'username', 'email', 'password'], 'required'],
             
-            ['lastName', 'required'],
-            ['lastName', 'string', 'max' => 100],
-            
-            ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            [['first_name', 'last_name'], 'string', 'min' => 2, 'max' => 100],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-            ['password', 'required'],
             ['password', 'string', 'min' => 6],
+            ['email', 'string', 'max' => 255],
+
+            ['email', 'email'],
+            
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],    
         ];
     }
 
@@ -56,8 +49,8 @@ class SignupForm extends Model
         }
         
         $user = new User();
-        $user->first_name = $this->firstName;
-        $user->last_name = $this->lastName;
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);

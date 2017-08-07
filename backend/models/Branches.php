@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $company_id
  * @property string $name
- * @property string $address
+ * @property string $adrress
  * @property string $created_date
  * @property string $status
  *
@@ -33,12 +33,12 @@ class Branches extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'name', 'address', 'created_date', 'status'], 'required'],
+            [['company_id', 'status'], 'required'],
             [['company_id'], 'integer'],
             [['created_date'], 'safe'],
             [['status'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['address'], 'string', 'max' => 255],
+            [['adrress'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
@@ -52,7 +52,7 @@ class Branches extends \yii\db\ActiveRecord
             'id' => 'ID',
             'company_id' => 'Company Name',
             'name' => 'Branch Name',
-            'address' => 'Address',
+            'adrress' => 'Adrress',
             'created_date' => 'Created Date',
             'status' => 'Status',
         ];

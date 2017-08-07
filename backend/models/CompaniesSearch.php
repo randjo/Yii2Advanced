@@ -59,7 +59,7 @@ class CompaniesSearch extends Companies
 
         // grid filtering conditions
         $query->andFilterWhere([
-//            'id' => $this->id,
+            'id' => $this->id,
             'created_date' => $this->created_date,
         ]);
 

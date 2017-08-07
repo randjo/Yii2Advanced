@@ -8,9 +8,9 @@ use Yii;
  * This is the model class for table "departments".
  *
  * @property integer $id
+ * @property integer $company_id
  * @property integer $branch_id
  * @property string $name
- * @property integer $company_id
  * @property string $created_date
  * @property string $status
  *
@@ -33,8 +33,8 @@ class Departments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['branch_id', 'name', 'company_id', 'created_date', 'status'], 'required'],
-            [['branch_id', 'company_id'], 'integer'],
+            [['company_id', 'branch_id', 'status'], 'required'],
+            [['company_id', 'branch_id'], 'integer'],
             [['created_date'], 'safe'],
             [['status'], 'string'],
             [['name'], 'string', 'max' => 100],
@@ -50,9 +50,9 @@ class Departments extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'company_id' => 'Company Name',
             'branch_id' => 'Branch Name',
             'name' => 'Department Name',
-            'company_id' => 'Company Name',
             'created_date' => 'Created Date',
             'status' => 'Status',
         ];
