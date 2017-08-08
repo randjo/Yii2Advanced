@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use dosamigos\datepicker\DatePicker;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\settings\models\CompaniesSearch */
@@ -25,11 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'email:email',
             'address',
-            'created_date',
+            [
+                'attribute' => 'created_date',
+                'value' => 'created_date',
+                'format' => 'raw',
+                'filter' => DateTimePicker::widget([
+                    'type' => DateTimePicker::TYPE_INPUT,
+                    'model' => $searchModel,
+                    'attribute' => 'created_date',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd hh:ii:ss'
+                    ]
+                ]),
+            ],
             [
                 'attribute' => 'start_date',
                 'value' => 'start_date',

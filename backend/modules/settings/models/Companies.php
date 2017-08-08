@@ -2,6 +2,8 @@
 
 namespace backend\modules\settings\models;
 
+use Yii;
+
 /**
  * This is the model class for table "companies".
  *
@@ -9,6 +11,7 @@ namespace backend\modules\settings\models;
  * @property string $name
  * @property string $email
  * @property string $address
+ * @property string $logo
  * @property string $created_date
  * @property string $start_date
  * @property string $status
@@ -18,6 +21,7 @@ namespace backend\modules\settings\models;
  */
 class Companies extends \yii\db\ActiveRecord
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -33,9 +37,11 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             [['created_date', 'start_date'], 'safe'],
-            [['start_date', 'status'], 'required'],
+            [['status'], 'required'],
             [['status'], 'string'],
+            [['file'], 'file'],
             [['name', 'email'], 'string', 'max' => 100],
+            [['logo'], 'string', 'max' => 200],
             [['address'], 'string', 'max' => 255],
         ];
     }
@@ -47,12 +53,14 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Company Name',
             'email' => 'Email',
             'address' => 'Address',
             'created_date' => 'Created Date',
-            'start_date' => 'Start Date',
             'status' => 'Status',
+            'file' => 'Logo',
+            'logo' => 'Logo',
+            'start_date' => 'Start Date',
         ];
     }
 

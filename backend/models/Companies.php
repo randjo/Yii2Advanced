@@ -6,15 +6,15 @@ use Yii;
 
 /**
  * This is the model class for table "companies".
- *
+ * 
  * @property integer $id
  * @property string $name
  * @property string $email
  * @property string $address
+ * @property string $logo
  * @property string $created_date
  * @property string $start_date
  * @property string $status
- * @property string $logo
  *
  * @property Branches[] $branches
  * @property Departments[] $departments
@@ -36,8 +36,8 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_date'], 'safe'],
-            [['logo', 'start_date', 'status'], 'required'],
+            [['created_date', 'start_date'], 'safe'],
+            [['status'], 'required'],
             [['status'], 'string'],
             [['file'], 'file'],
             [['name', 'email'], 'string', 'max' => 100],
@@ -59,6 +59,8 @@ class Companies extends \yii\db\ActiveRecord
             'created_date' => 'Created Date',
             'status' => 'Status',
             'file' => 'Logo',
+            'logo' => 'Logo',
+            'start_date' => 'Start Date',
         ];
     }
 

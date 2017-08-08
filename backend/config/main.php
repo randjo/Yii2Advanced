@@ -29,12 +29,31 @@ return [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
+//        'log' => [
+//            'traceLevel' => YII_DEBUG ? 3 : 0,
+//            'targets' => [
+//                [
+//                    'class' => 'yii\log\FileTarget',
+//                    'levels' => ['error', 'warning', 'info'],
+//                ],
+//            ],
+//        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'exportInterval' => YII_DEBUG ? 1 : 1000,
+                    'levels' => ['error', 'warning', 'info'],
+                    'except' => ['yii\db\*', 'yii\web\*'],
+                    'logVars' => [],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => '@app/runtime/logs/trace.log',
+                    'exportInterval' => YII_DEBUG ? 50 : 1000,
+                    'levels' => ['trace'],
+                    'logVars' => [],
                 ],
             ],
         ],

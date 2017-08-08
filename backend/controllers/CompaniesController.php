@@ -78,14 +78,14 @@ class CompaniesController extends Controller
         $model = new Companies();
 
         if ($model->load(Yii::$app->request->post()) ) {
-
-            $imageName = $model->company_name;
+            Yii::info(\yii\helpers\VarDumper::dumpAsString($model->name));
+            $imageName = $model->name;
             //get instance of the upload file
             $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
-
-            $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
-
+            if ($model->file) {
+                $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
+                $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
+            }
             $model->created_date = date('Y/m/d H:i:s');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
