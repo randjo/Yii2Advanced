@@ -2,8 +2,6 @@
 
 namespace backend\modules\settings\models;
 
-use Yii;
-
 /**
  * This is the model class for table "companies".
  *
@@ -12,6 +10,7 @@ use Yii;
  * @property string $email
  * @property string $address
  * @property string $created_date
+ * @property string $start_date
  * @property string $status
  *
  * @property Branches[] $branches
@@ -33,8 +32,8 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_date'], 'safe'],
-            [['status'], 'required'],
+            [['created_date', 'start_date'], 'safe'],
+            [['start_date', 'status'], 'required'],
             [['status'], 'string'],
             [['name', 'email'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 255],
@@ -52,6 +51,7 @@ class Companies extends \yii\db\ActiveRecord
             'email' => 'Email',
             'address' => 'Address',
             'created_date' => 'Created Date',
+            'start_date' => 'Start Date',
             'status' => 'Status',
         ];
     }
