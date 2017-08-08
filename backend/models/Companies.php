@@ -12,13 +12,16 @@ use Yii;
  * @property string $email
  * @property string $address
  * @property string $created_date
+ * @property string $start_date
  * @property string $status
+ * @property string $logo
  *
  * @property Branches[] $branches
  * @property Departments[] $departments
  */
 class Companies extends \yii\db\ActiveRecord
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -34,9 +37,11 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             [['created_date'], 'safe'],
-            [['status'], 'required'],
+            [['logo', 'start_date', 'status'], 'required'],
             [['status'], 'string'],
+            [['file'], 'file'],
             [['name', 'email'], 'string', 'max' => 100],
+            [['logo'], 'string', 'max' => 200],
             [['address'], 'string', 'max' => 255],
         ];
     }
@@ -53,6 +58,7 @@ class Companies extends \yii\db\ActiveRecord
             'address' => 'Address',
             'created_date' => 'Created Date',
             'status' => 'Status',
+            'file' => 'Logo',
         ];
     }
 
