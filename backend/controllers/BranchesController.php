@@ -65,6 +65,13 @@ class BranchesController extends Controller
     {
         $model = new Branches();
 
+        if (Yii::$app->request->post()) {
+            $post = Yii::$app->request->post('Branches');
+            if (empty($post['address'])) {
+                $model->setScenario(Branches::SCENARIO_WITHOUT_ADDRESS);
+            }
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             $model->created_date = date('Y/m/d H:i:s');
             $model->save();
@@ -85,6 +92,13 @@ class BranchesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if (Yii::$app->request->post()) {
+            $post = Yii::$app->request->post('Branches');
+            if (empty($post['address'])) {
+                $model->setScenario(Branches::SCENARIO_WITHOUT_ADDRESS);
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

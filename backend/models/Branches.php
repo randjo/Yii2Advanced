@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $company_id
  * @property string $name
- * @property string $adrress
+ * @property string $address
  * @property string $created_date
  * @property string $status
  *
@@ -19,6 +19,15 @@ use Yii;
  */
 class Branches extends \yii\db\ActiveRecord
 {
+    const SCENARIO_WITHOUT_ADDRESS = 'no_address';
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_WITHOUT_ADDRESS] = ['company_id', 'name', 'created_date', 'status'];
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
@@ -38,7 +47,7 @@ class Branches extends \yii\db\ActiveRecord
             [['created_date'], 'safe'],
             [['status'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['adrress'], 'string', 'max' => 255],
+            [['address'], 'string', 'max' => 255],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
@@ -52,7 +61,7 @@ class Branches extends \yii\db\ActiveRecord
             'id' => 'ID',
             'company_id' => 'Company Name',
             'name' => 'Branch Name',
-            'adrress' => 'Adrress',
+            'address' => 'Address',
             'created_date' => 'Created Date',
             'status' => 'Status',
         ];

@@ -19,7 +19,7 @@ class m170807_105333_create_branches_table extends Migration
             'id' => $this->primaryKey(),
             'company_id' => $this->integer()->notNull(),
             'name' => $this->string(100),
-            'adrress' => $this->string(255),
+            'address' => $this->string(255),
             'created_date' => $this->dateTime(),
 //            'status' => $this->enum('active', 'inactive'),
         ]);

@@ -19,7 +19,7 @@ class BranchesSearch extends Branches
     {
         return [
             [['id'], 'integer'],
-            [['company_id', 'name', 'adrress', 'created_date', 'status'], 'safe'],
+            [['company_id', 'name', 'address', 'created_date', 'status'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class BranchesSearch extends Branches
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'adrress', $this->adrress])
+            ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'companies.name', $this->company_id]);
 
