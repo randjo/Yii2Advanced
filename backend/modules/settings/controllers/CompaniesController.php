@@ -68,13 +68,13 @@ class CompaniesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             
-//            $imageName = $model->name;
-//            //get instance of the upload file
-//            $model->file = UploadedFile::getInstance($model, 'file');
-//            if ($model->file) {
-//                $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
-//                $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
-//            }
+            $imageName = $model->name;
+            //get instance of the upload file
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
+                $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
+            }
 
             $model->created_date = date('Y/m/d H:i:s');
             $model->save();

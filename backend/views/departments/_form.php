@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use backend\models\Companies;
+use backend\models\Branches;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Departments */
@@ -11,10 +15,29 @@ use yii\widgets\ActiveForm;
 <div class="departments-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'company_id')->textInput() ?>
-
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+    <?php $url = Yii::$app->urlManager->createUrl(['branches/lists']); ?>
+    
+    <?= $form->field($model, 'company_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Companies::find()->all(), 'id', 'name'),
+        'language' => 'en',
+        'options' => [
+            'placeholder' => 'Select Company',
+            'onChange' => '$.post("' . Yii::$app->homeUrl . 'branches/lists?id="+$(this).val(),'
+            . 'function(data) {$("select#departments-branch_id").html(data)})',
+        ],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]) ?>
+    
+    <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Branches::find()->all(), 'id', 'name'),
+        'language' => 'en',
+        'options' => ['placeholder' => 'Select Branch'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
