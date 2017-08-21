@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\web\ForbiddenHttpException;
 
 /**
  * CompaniesController implements the CRUD actions for Companies model.
@@ -75,24 +76,29 @@ class CompaniesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Companies();
+        if (Yii::$app->user->can('create-company')) {
+            $model = new Companies();
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            Yii::info(\yii\helpers\VarDumper::dumpAsString($model->name));
-            $imageName = $model->name;
-            //get instance of the upload file
-            $model->file = UploadedFile::getInstance($model, 'file');
-            if ($model->file) {
-                $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
-                $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
+            if ($model->load(Yii::$app->request->post())) {
+
+                $imageName = $model->name;
+                //get instance of the upload file
+                $model->file = UploadedFile::getInstance($model, 'file');
+                if ($model->file) {
+                    $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
+                    $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
+                }
+
+                $model->created_date = date('Y/m/d H:i:s');
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
             }
-            $model->created_date = date('Y/m/d H:i:s');
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException;
         }
     }
 

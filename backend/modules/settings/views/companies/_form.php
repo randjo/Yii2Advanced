@@ -11,7 +11,7 @@ use dosamigos\datepicker\DatePicker;
 
 <div class="companies-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -28,6 +28,8 @@ use dosamigos\datepicker\DatePicker;
             'format' => 'yyyy-mm-dd'
         ]
     ]);?>
+    
+    <?= $form->field($model, 'file')->fileInput() ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 
