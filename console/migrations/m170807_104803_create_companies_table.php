@@ -18,8 +18,10 @@ class m170807_104803_create_companies_table extends Migration
             'email' => $this->string(100),
             'address' => $this->string(255),
             'created_date' => $this->dateTime(),
-//            'status' => $this->enum('active','inactive'),
         ]);
+
+        $this->execute("ALTER TABLE `companies` 
+            ADD `status` ENUM('active','inactive') NOT NULL AFTER `created_date`;");
     }
 
     /**

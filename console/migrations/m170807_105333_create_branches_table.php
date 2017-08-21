@@ -21,8 +21,10 @@ class m170807_105333_create_branches_table extends Migration
             'name' => $this->string(100),
             'address' => $this->string(255),
             'created_date' => $this->dateTime(),
-//            'status' => $this->enum('active', 'inactive'),
         ]);
+
+        $this->execute("ALTER TABLE `branches` 
+            ADD `status` ENUM('active','inactive') NOT NULL AFTER `created_date`;");
 
         // creates index for column `company_id`
         $this->createIndex(

@@ -22,8 +22,10 @@ class m170807_105809_create_departments_table extends Migration
             'branch_id' => $this->integer()->notNull(),
             'name' => $this->string(100),
             'created_date' => $this->dateTime(),
-//            'status' => $this->enum('active','inactive'),
         ]);
+
+        $this->execute("ALTER TABLE `departments` 
+            ADD `status` ENUM('active','inactive') NOT NULL AFTER `created_date`;");
 
         // creates index for column `company_id`
         $this->createIndex(
