@@ -1,8 +1,0 @@
-psql -U postgres
-enter password: randjo85
-create database namedb;
-\l - show all db
-create user username with password 'password'
-grant all on database yii2basic to root;
-\q - exit
-psql -d yii2basic -U root - connect to db with user
