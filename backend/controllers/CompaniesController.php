@@ -80,15 +80,7 @@ class CompaniesController extends Controller
             $model = new Companies();
 
             if ($model->load(Yii::$app->request->post())) {
-
-                $imageName = $model->name;
-                //get instance of the upload file
-                $model->file = UploadedFile::getInstance($model, 'file');
-                if ($model->file) {
-                    $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
-                    $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
-                }
-
+                $this->saveLogo($model);
                 $model->created_date = date('Y/m/d H:i:s');
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -112,7 +104,16 @@ class CompaniesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $this->saveLogo($model);
+            $model->save();
+            Yii::$app->mailer->compose()
+                ->setFrom(['rangelvmarinov@gmail.com' => 'Rangel'])
+                ->setTo('rangelvmarinov@gmail.com')
+                ->setSubject('Successfully update company.')
+                ->setHtmlBody('Hello ' . Yii::$app->user->identity->fullNames . ',<br>
+                    You have successfully update ' . $model->name . ' company')
+                ->send();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -147,6 +148,20 @@ class CompaniesController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @param Companies $model
+     */
+    public function saveLogo(Companies $model)
+    {
+        $imageName = $model->name;
+        //get instance of the upload file
+        $model->file = UploadedFile::getInstance($model, 'file');
+        if ($model->file) {
+            $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
+            $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
         }
     }
 }

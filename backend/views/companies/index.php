@@ -1,9 +1,12 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use dosamigos\datepicker\DatePicker;
 use kartik\datetime\DateTimePicker;
+use yii\widgets\Pjax;
+use backend\models\Companies;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\settings\models\CompaniesSearch */
@@ -20,13 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'name',
+            //'name',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->name . ' ' . Html::img(Yii::$app->request->baseUrl . '/' . $model->logo,
+                            ['alt' => 'logo', 'width' => '20', 'height' => '20']);
+                },
+            ],
             'email:email',
             'address',
             [
@@ -56,9 +68,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ]),
             ],
-            'status',
+            [
+                'attribute' => 'status',
+                'headerOptions' => ['width' => '10%'],
+                'format' => 'raw',
+                'filter' => ['active' => 'Active', 'inactive' => 'Inactive'],
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 </div>

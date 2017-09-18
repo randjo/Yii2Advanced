@@ -34,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'address',
             'created_date',
             'start_date',
+            [
+                'attribute' => 'logo',
+                'value' => Yii::$app->request->baseUrl . '/' . $model->logo,
+                'format' => ['image', ['width' => '30', 'height' => '30']]
+            ],
             'status',
         ],
     ]) ?>

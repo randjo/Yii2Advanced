@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Branches */
 
-$this->title = 'Create Branches';
+$this->title = 'Create Branch';
 $this->params['breadcrumbs'][] = ['label' => 'Branches', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
