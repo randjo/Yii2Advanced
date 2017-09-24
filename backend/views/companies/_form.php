@@ -6,6 +6,7 @@ use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Companies */
+/* @var $branch \backend\models\Branches */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -32,6 +33,16 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'file')->fileInput() ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
+
+    <?php
+    if (isset($branch)) { ?>
+        <!--Create branch for this company-->
+        <?= $form->field($branch, 'name')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($branch, 'address')->textInput(['maxlength' => true, 'value' => '']) ?>
+
+        <?= $form->field($branch, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => 'Status']) ?>
+    <?php } ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

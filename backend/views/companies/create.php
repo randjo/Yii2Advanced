@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Companies */
+/* @var $branch \backend\models\Branches */
 
 $this->title = 'Create Companies';
 $this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'branch' => $branch,
     ]) ?>
 
 </div>

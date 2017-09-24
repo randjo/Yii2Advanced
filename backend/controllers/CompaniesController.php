@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Branches;
 use Yii;
 use backend\models\Companies;
 use backend\models\CompaniesSearch;
@@ -78,15 +79,21 @@ class CompaniesController extends Controller
     {
         if (Yii::$app->user->can('create-company')) {
             $model = new Companies();
+            $branch = new Branches();
 
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()) &&
+                $branch->load(Yii::$app->request->post())) {
                 $this->saveLogo($model);
                 $model->created_date = date('Y/m/d H:i:s');
                 $model->save();
+                $branch->company_id = $model->id;
+                $branch->created_date = date('Y-m-d h:m:s');
+                $branch->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
+                    'branch' => $branch,
                 ]);
             }
         } else {
@@ -156,10 +163,12 @@ class CompaniesController extends Controller
      */
     public function saveLogo(Companies $model)
     {
+        Yii::info(\yii\helpers\VarDumper::dumpAsString(111));
         $imageName = $model->name;
         //get instance of the upload file
         $model->file = UploadedFile::getInstance($model, 'file');
         if ($model->file) {
+            Yii::info(\yii\helpers\VarDumper::dumpAsString(222));
             $model->file->saveAs('uploads/' . $imageName . '.' . $model->file->extension);
             $model->logo = 'uploads/' . $imageName . '.' . $model->file->extension;
         }
