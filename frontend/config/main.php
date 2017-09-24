@@ -29,7 +29,17 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'exportInterval' => YII_DEBUG ? 1 : 1000,
+                    'levels' => ['error', 'warning', 'info'],
+                    'except' => ['yii\db\*', 'yii\web\*'],
+                    'logVars' => [],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => '@app/runtime/logs/trace.log',
+                    'exportInterval' => YII_DEBUG ? 50 : 1000,
+                    'levels' => ['trace'],
+                    'logVars' => [],
                 ],
             ],
         ],

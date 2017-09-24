@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::button('Create Branch', ['id' => 'modal-button', 'value' => Url::to('/branches/create'), 'class' => 'btn btn-success']) ?>
+        <?php $id = Yii::$app->user->can('create-branch') ? 'modal-button' : 'no-permission'; ?>
+        <?= Html::button('Create Branch', ['id' => $id, 'value' => Url::to('/branches/create'), 'class' => 'btn btn-success']) ?>
     </p>
 
     <?php
