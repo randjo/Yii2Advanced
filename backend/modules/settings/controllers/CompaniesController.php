@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
  * CompaniesController implements the CRUD actions for Companies model.
@@ -66,6 +67,11 @@ class CompaniesController extends Controller
     {
         $model = new Companies();
 
+        if (Yii::$app->request->isAjax && $model->load($_POST)) {
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             
             $imageName = $model->name;
@@ -77,13 +83,13 @@ class CompaniesController extends Controller
             }
 
             $model->created_date = date('Y/m/d H:i:s');
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+        return $this->render('create', [
                 'model' => $model,
             ]);
-        }
     }
 
     /**

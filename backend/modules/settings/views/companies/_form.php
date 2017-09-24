@@ -11,7 +11,12 @@ use dosamigos\datepicker\DatePicker;
 
 <div class="companies-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype' => 'multipart/form-data'
+        ],
+        'enableAjaxValidation' => true,
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

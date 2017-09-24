@@ -2,8 +2,8 @@
 
 namespace backend\modules\settings\models;
 
-use Yii;
-
+use backend\models\Branches;
+use backend\models\Departments;
 /**
  * This is the model class for table "companies".
  *
@@ -36,7 +36,8 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_date', 'start_date'], 'safe'],
+            [['created_date'], 'safe'],
+            ['start_date', 'checkDate'],
             [['status'], 'required'],
             [['status'], 'string'],
             [['file'], 'file'],
@@ -44,6 +45,15 @@ class Companies extends \yii\db\ActiveRecord
             [['logo'], 'string', 'max' => 200],
             [['address'], 'string', 'max' => 255],
         ];
+    }
+
+    public function checkDate($attribute)
+    {
+        $today = date('Y-m-d');
+        $selectedDate = $this->start_date;
+        if ($selectedDate > $today) {
+            $this->addError($attribute, 'Company Start Date must be smaller.');
+        }
     }
 
     /**

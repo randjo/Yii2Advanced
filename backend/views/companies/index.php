@@ -1,12 +1,10 @@
 <?php
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use dosamigos\datepicker\DatePicker;
 use kartik\datetime\DateTimePicker;
 use yii\widgets\Pjax;
-use backend\models\Companies;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\settings\models\CompaniesSearch */
@@ -36,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($model) {
                     return $model->name . ' ' . Html::img(Yii::$app->request->baseUrl . '/' . $model->logo,
-                            ['alt' => 'logo', 'width' => '20', 'height' => '20']);
+                            ['alt' => '', 'width' => '20', 'height' => '20']);
                 },
             ],
             'email:email',
